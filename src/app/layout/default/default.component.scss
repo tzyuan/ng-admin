@@ -1,0 +1,66 @@
+.layout-container {
+    height: 100%;
+    display: flex;
+    padding-top: 62px;
+
+    section {
+        padding-left: 10px;
+        flex: 1;
+    }
+
+    app-layout-default-sidebar {
+        box-shadow: -7px 1px 7px 4px #333;
+    }
+}
+
+
+
+.iceDesignLayout {
+    height: 100vh;
+    background-color: #efefef;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+    overflow: hidden;
+}
+
+.ice-layout {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.content {
+    color: #000;
+    padding: 10px 20px;
+
+    h2 {
+        text-align: center;
+        margin-bottom: 2em;
+    }
+
+    h4 {
+        margin-bottom: 1.5em;
+    }
+
+    b {
+        color: #000;
+    }
+
+    p {
+        color: #333;
+        text-indent: 2em;
+    }
+}
+
+.btn-close-modal {
+    margin: 20px auto 0;
+    background-color: #e42400;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    height: 45px;
+    line-height: 45px;
+    font-size: 14px;
+    width: 250px;
+    cursor: pointer;
+}

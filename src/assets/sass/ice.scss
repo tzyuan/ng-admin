@@ -1,0 +1,142 @@
+.ice-layout-main {
+    padding: 0 0 0 20px;
+}
+
+.ice-mb20 {
+    margin-bottom: 20px;
+}
+
+.ice-layout {
+    width: 100%;
+    min-height: 100vh;
+    padding: 0 0 0 0;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+
+    .ice-layout-section {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        min-height: 0;
+    }
+
+    .ice-layout-section-has-aside {
+        flex-direction: row;
+
+        .ice-layout-section-inner {
+            flex-direction: row;
+        }
+    }
+
+    .ice-layout-section-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        flex: auto;
+        width: 100%;
+    }
+
+    .ice-layout-aside {
+        background-color: transparent !important;
+        display: flex;
+        transition: all 0.2s linear;
+        overflow: hidden;
+        flex-direction: column;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        .ice-layout-aside-scroll {
+            flex: 1;
+            overflow: auto;
+        }
+
+        .next-nav {
+            background-color: transparent !important;
+
+            .next-nav-item {
+                background-color: transparent !important;
+                border-radius: $corner-1;
+
+                &.next-open {
+                    background-color: transparent !important;
+                }
+
+                &.next-selected {
+                    background-color: $color-brand1-6 !important;
+
+                    &::before {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        i~.ice-menu-collapse {
+            margin-left: 5px;
+        }
+    }
+
+    .ice-layout-main {
+        -webkit-box-flex: 1;
+        flex: 1;
+        display: flex;
+        padding: 0 20px;
+        flex-direction: column;
+        border-top: 10px solid #efefef;
+        overflow: hidden;
+
+        .container-breadcrumb {
+            padding: 16px 20px;
+            background-color: rgb(255, 255, 255);
+            // border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .container-block {
+            background-color: rgb(255, 255, 255);
+            // border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+
+            &.container-content {
+                overflow: auto;
+                flex: 1;
+
+                /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+                &::-webkit-scrollbar {
+                    width: 8px;
+                    height: 8px;
+                    background-color: #F5F5F5;
+                    border-radius: 0 6px 6px 0;
+                }
+
+                /*定义滚动条轨道 内阴影+圆角*/
+                &::-webkit-scrollbar-track {
+                    // box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+                    background-color: #F5F5F5;
+                }
+
+
+                /*定义滑块 内阴影+圆角*/
+                &::-webkit-scrollbar-thumb {
+                    // box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+                    background-color: #555;
+                }
+
+
+                iframe {
+                    height: 99%;
+                    width: 100%;
+                    border: none;
+                    margin: 0;
+                    padding: 0;
+                }
+            }
+        }
+    }
+}

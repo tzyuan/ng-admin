@@ -1,0 +1,38 @@
+<!--
+ * @Author: 曹雪原
+ * @since: 2019-11-11 15:40:55
+ * @lastTime: 2020-08-26 16:06:49
+ * @LastAuthor: 曹雪原
+ * @FilePath: /tpc-manage/src/app/layout/default/default.component.html
+ * @message: 
+ -->
+<!-- <app-layout-default-header></app-layout-default-header>
+<div class='layout-container'>
+  <app-layout-default-sidebar></app-layout-default-sidebar>
+  <section>
+    <router-outlet></router-outlet>
+  </section>
+</div>
+ -->
+<div class="iceDesignLayout">
+  <div class="ice-layout">
+    <app-layout-default-header></app-layout-default-header>
+    <div class="ice-layout-section ice-layout-section-has-aside ice-layout-scrollable">
+      <div class="ice-layout-section-inner">
+        <div class="ice-layout-aside ice-layout-aside-normal">
+          <div class="ice-layout-aside-scroll">
+            <app-layout-default-sidebar></app-layout-default-sidebar>
+          </div>
+        </div>
+        <div class="ice-layout-main">
+          <div class="container-breadcrumb">
+            <nz-breadcrumb [nzAutoGenerate]="true"></nz-breadcrumb>
+          </div>
+          <div class="container-block container-content">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
