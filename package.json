@@ -7,8 +7,8 @@
     "test": "ng test",
     "lint": "tslint --project . --fix",
     "e2e": "ng e2e",
-    "build": "ng build --baseHref=/tpc-manage/",
-    "prod": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --prod --baseHref=/tpc-manage/"
+    "build": "ng build --baseHref=/",
+    "prod": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --prod --baseHref=/"
   },
   "private": true,
   "dependencies": {

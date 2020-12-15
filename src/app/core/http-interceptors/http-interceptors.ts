@@ -1,7 +1,7 @@
 /*
  * @Date: 2019-05-30 11:32:20
  * @LastAuthor: 曹雪原
- * @lastTime: 2020-12-14 13:24:02
+ * @lastTime: 2020-12-15 11:27:57
  */
 import { Injectable, Injector } from '@angular/core';
 import {
@@ -17,7 +17,11 @@ import { CookiesService } from 'src/app/shared/services/cookies/cookies.service'
 import { Router } from '@angular/router';
 import { isUndefined } from 'util';
 
-
+interface Response {
+    code: number;
+    data: any;
+    msg: string;
+}
 const CODEMESSAGE = {
     200: '服务器成功返回请求的数据。',
     201: '新建或修改数据成功。',
@@ -55,17 +59,17 @@ export class DefaultInterceptor implements HttpInterceptor {
         return this.injector.get(NzModalService);
     }
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<Response>> {
         let URL = req.url;
         if (!URL.startsWith('https://') && !URL.startsWith('http://')) {
             URL = environment.SERVER_URL + URL;
         }
 
+        // 此处修改header参数
         let httpHeaders = new HttpHeaders();
-        if (this.cookies.getCookie('sign') && this.cookies.getCookie('uuid')) {
+        if (this.cookies.getCookie('token')) {
             httpHeaders = new HttpHeaders()
-                .set('Authorization', this.cookies.getCookie('sign'))
-                .set('UUID', this.cookies.getCookie('uuid'));
+                .set('token', this.cookies.getCookie('token'));
         }
         const newReq = req.clone({ url: URL, headers: httpHeaders });
         return next.handle(newReq).pipe(
@@ -88,34 +92,21 @@ export class DefaultInterceptor implements HttpInterceptor {
 
     // 数据处理方法
     private handleData(ev: HttpResponseBase): Observable<any> {
-        // this.checkStatus(ev);
         switch (ev.status) {
             case 200:
                 if (ev instanceof HttpResponse) {
-                    const body: any = ev.body;
-                    if (body && (body.code === undefined && body.error === undefined)) {
-                        return of(new HttpResponse(Object.assign({ body })));
-                    }
-                    if (body && (body.code === 200 || body.code === 0 || body.error === 0)) {
-                        if (body.pagination) {
-                            const data = {
-                                data: body.data || body.obj,
-                                pagination: body.pagination
-                            };
-                            return of(new HttpResponse(Object.assign({ body: data })));
-                        }
-                        return of(new HttpResponse(Object.assign({ body: body.data || body.obj })));
+                    const body: Response = ev.body;
+                    if (body && body.code === 200) {
+                        return of(new HttpResponse(Object.assign({ body: body.data })));
                     } else {
-                        if (body.code === 500) {
-                            this.router.navigateByUrl('/passport/login');
-                        } else if (body.code === 401) {
+                        if (body.code === 401) {
                             this.msg.error('登陆过期');
+                            this.router.navigateByUrl('/passport/login');
                             return throwError({});
                         } else {
-                            this.msg.error(body.msg || body.status);
-                            return throwError({});
+                            this.msg.error(body.msg);
+                            return throwError({ error: body.msg });
                         }
-
                     }
                 }
                 break;

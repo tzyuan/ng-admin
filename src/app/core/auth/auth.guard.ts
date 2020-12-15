@@ -1,7 +1,7 @@
 /*
  * @Date: 2019-05-31 09:46:54
  * @LastAuthor: 曹雪原
- * @lastTime: 2020-08-27 15:36:49
+ * @lastTime: 2020-12-15 11:00:34
  */
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate, Router, CanLoad, Route, UrlSegment } from '@angular/router';
@@ -21,8 +21,7 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
-    const name = this.cookies.getCookie('userName');
-    return true;
+    const name = this.cookies.getCookie('name');
     if (name) {
       return true;
     }
